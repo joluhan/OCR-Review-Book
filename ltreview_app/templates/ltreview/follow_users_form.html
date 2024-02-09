@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+  <!-- Vue pour rechercher des utilisateurs afin de s'y abonner -->
+  <h3 class="my-3 text-center">Follow other users</h3>
+  <div class="search-user">
+    <form method="post">
+      {% csrf_token %}
+      <label for="search_user">Search for a user :</label>
+      <input type="text" name="search_user" id="search-user">
+      <button type="submit" class="search_button">Search</button>
+    </form>
+
+    {% if search_results %}
+      <h3 class="my-3 text-center">Search results :</h3>
+      <div class="search_results">
+      <ul>
+        {% for user in search_results %}
+          <li>
+            {{ user.username }}
+            <form method="post" action="{% url 'follow_users' %}">
+              {% csrf_token %}
+              <input type="hidden" name="user_id" value="{{ user.id }}">
+              <button type="submit" class="btn btn-primary">Follow</button>
+            </form>
+          </li>
+        {% endfor %}
+      </ul>
+      </div>
+    {% endif %}
+
+    <div class="follow_list">
+      <div class="user_followlist">
+        <h4>Subscriptions</h4>
+        <ul>
+          {% for user in request.user.follows.all %}
+            <li>
+              {{ user.username }}
+              <form method="post" action="{% url 'unfollow_user' user.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-warning">Unfollow</button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="followed_list">
+        <!-- Vue pour les utilisateurs qui nous suivent -->
+        <h4>Subscribers</h4>
+        <ul>
+        {% for user in request.user.followed_by.all %}
+          <li>{{ user.username }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load reviews_app_extras %}
+{% block content %}
+  <div class="mx-auto mt-3 w-75 d-flex justify-content-around">
+    <a href="{% url 'ticket_create' %}" class="btn btn-info"> Request a review</a>
+    <a href="{% url 'review_and_ticket_create' %}" class="btn btn-primary"> Create a review</a>
+  </div>
+  
+  <h2 class="text-center">My feed</h2>
+    {% for instance in reviews_and_tickets %}
+      {% if instance|model_type == 'Ticket' %}
+        <div class="post_ticket">
+          <div class="head_box border-bottom mb-2">
+            {% if instance.user == request.user %}
+              <p>You requested a review</p>
+            {% else %}
+              <p>{{ instance.user }} requested a review</p>
+            {% endif %}
+            <p>{{ instance.time_created }}</p>
+          </div>
+          <p>{{ instance.title }}</p>
+          <p>{{ instance.description }}</p>
+          {% if instance.image %}
+            <img src="{{ instance.image.url }}">
+          {% endif %}
+          <div class="button_post_action">
+            {% if instance.id in user_has_created_review or instance.user == request.user %}
+              <!-- Ne rien afficher ici car l'utilisateur a déjà créé une review -->
+            {% else %}
+              <a href="{% url 'create_review_from_ticket' ticket_id=instance.id %}" class="btn btn-primary">Create a review</a>
+            {% endif %}
+        </div>
+        </div>
+      {% endif %}
+
+      {% if instance|model_type == 'Review' %}
+        <div class="post_ticket">
+          <div class="head_box border-bottom mb-2">
+            {% if instance.author == request.user %}
+              <p class="small">You posted a review</p>
+            {% else %}
+              <p class="small">{{ instance.author }} posted a review</p>
+            {% endif %}
+            <p class="small">{{ instance.time_created }}</p>
+          </div>
+
+          <div class="review_comment">
+            <p>{{ instance.headline }} -</p>
+
+            <!-- Afficher les étoiles en fonction de la note -->
+            <div class="stars">
+              {% for i in "12345" %}
+                <span class="star{% if i|add:'0' <= instance.rating %} active{% endif %}">★</span>
+              {% endfor %}
+            </div>
+          </div>
+          <p>{{ instance.body }}</p>
+          <div class="post_ticket">
+            <p>Associated ticket : {{ instance.ticket.user }}</p>
+            <p>{{ instance.ticket.title }}</p>
+            <p>{{ instance.ticket.description }}</p>
+              {% if instance.ticket.image %}
+                <img src="{{ instance.ticket.image.url }}">
+              {% endif %}
+              <div class="button_post_action">
+                {% if instance.ticket.id in user_has_created_review or instance.ticket.user == request.user %}
+                  <!-- Ne rien afficher ici car l'utilisateur a déjà créé une review -->
+                {% else %}
+                  <a href="{% url 'create_review_from_ticket' ticket_id=instance.ticket.id %}" class="btn btn-primary">Create a review</a>
+                {% endif %}
+              </div>
+          </div>
+        </div>
+      {% endif %} 
+    {% endfor %}
+
+{% endblock content %}

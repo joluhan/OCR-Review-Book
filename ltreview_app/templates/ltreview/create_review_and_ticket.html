@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3 class="my-3 text-center"> Create a review </h3>
+    <form method="post" enctype="multipart/form-data" class="ticket-form">
+      <div class="post_ticket">
+        <h4>Book/Article<h3>
+        {{ ticket_form.as_p }}
+      </div>
+      <div class="post_ticket">
+        <h4>Review</h4>
+        {{ review_form.as_p }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Publish</button>
+      </div>
+    </form>
+{% endblock content %}

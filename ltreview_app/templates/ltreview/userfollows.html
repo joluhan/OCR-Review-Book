@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Follows</title>
+</head>
+<body>
+    <h1>Utilisateurs Suivis</h1>
+    {% for follow in userfollows %}
+        <p>{{ follow.followed_user.username }}</p>
+        <a href="/unfollow/{{ follow.followed_user.id }}">Se désabonner</a>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review</title>
+</head>
+<body>
+    <h1>{{ review.headline }}</h1>
+    <p>{{ review.body }}</p>
+    <p>Note: {{ review.rating }}/5</p>
+    <p>Créé par: {{ review.user.username }}</p>
+    <p>Date de création: {{ review.time_created }}</p>
+    <p>Ticket associé: <a href="/ticket/{{ review.ticket.id }}">{{ review.ticket.title }}</a></p>
+</body>
+</html>

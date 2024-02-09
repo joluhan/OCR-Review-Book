@@ -1,0 +1,535 @@
+@charset "UTF-8";
+* {
+  font-size: 16px;
+}
+body {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  background-image: url("images/watercolor-paper-texture.jpg");
+  background-position: center;
+  width: 100%;
+  height: 20%;
+}
+
+.header .image_logo {
+  height: 80%;
+  width: auto;
+  margin-left: 30px;
+}
+
+.header h1 {
+  padding-left: 30px;
+  font-family: "Special Elite", cursive;
+}
+
+.header nav {
+  margin-left: 32%;
+}
+
+.header nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 30px;
+  gap: 30px;
+}
+
+.header nav ul li {
+  display: inline-block;
+  position: relative;
+}
+
+.header nav ul li:hover .sous_menu {
+  display: block;
+}
+
+.header nav ul li a {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  color: white;
+  font-family: "Courier Prime", monospace;
+}
+
+.header nav ul li a:hover {
+  color: #8ED5BE;
+}
+
+.header nav ul .sous_menu {
+  display: none;
+  position: absolute;
+  background-image: url("images/watercolor-paper-texture.jpg");
+  width: 200px;
+}
+
+.header nav ul .sous_menu li {
+  display: block;
+}
+
+.header nav ul .sous_menu li:hover a {
+  color: #8ED5BE;
+}
+
+.header .avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  margin-right: 30px;
+  border: white solid 2px;
+}
+
+.header .avatar:hover {
+  border: #8ED5BE solid 2px;
+}
+
+.link_create {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  gap: 20%;
+}
+
+.link_create a {
+  text-decoration: none;
+  padding: 10px 20px 10px 20px;
+  border: black solid 2px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+}
+
+.link_create a:hover {
+  border: #d36e70 solid 2px;
+  color: white;
+  background-color: #d36e70;
+}
+
+.link_create a:active {
+  color: white;
+  background-color: #d36e70;
+}
+
+.button_post_action {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5%;
+}
+
+.button_post_action .button_create_critique {
+  color: black;
+  background-color: white;
+  border: black solid 2px;
+}
+
+.button_post_action .button_create_critique:hover {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 2px;
+}
+
+input[type="file"] {
+  width: 100%;
+  height: 10%;
+}
+.rating-buttons {
+  display: flex;
+  gap: 10px;
+}
+.button_comeback {
+  text-decoration: none;
+  text-align: center;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.button_comeback:hover {
+  color: #d36e70;
+}
+
+.button_action {
+  text-decoration: none;
+  border: black solid 2px;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+  background-color: white;
+  color: black;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+}
+
+#main h2 {
+  font-family: "Special Elite", cursive;
+  color: black;
+  text-align: center;
+  margin-top: 3%;
+}
+
+.post_ticket {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  width: 60%;
+  height: auto;
+  padding: 10px 20px 20px 20px;
+  border: black solid 2px;
+}
+
+.post_ticket .head_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post_ticket .critique_comment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post_ticket .critique_comment p {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+}
+
+.post_ticket .critique_comment .stars {
+  margin-left: 20px;
+}
+
+.post_ticket img {
+  width: 20%;
+  height: auto;
+}
+
+/* forms.scss */
+/* Appliquer les styles de base aux champs de saisie et aux zones de texte */
+input[type="text"],
+textarea {
+  padding: 8px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  border: black solid 2px;
+  width: 100%;
+  height: auto;
+}
+
+.password_form {
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  margin-left: 30%;
+}
+
+.password_form label {
+  display: block;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.password_form input[type="password"],
+.password_form textarea {
+  padding: 8px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  border: black solid 2px;
+  width: 40%;
+  height: auto;
+}
+
+.password_form button {
+  margin: 10%;
+  width: 20%;
+  height: 10%;
+  border-radius: 5%;
+  margin-top: auto;
+  margin-bottom: 25px;
+}
+
+.confirmation_password_change {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.confirmation_password_change a {
+  text-decoration: none;
+  color: #C8841C;
+}
+
+.confirmation_password_change a:hover {
+  background-color: #C8841C;
+  color: white;
+}
+
+.change_profile_photo {
+  margin: auto;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 80%;
+  gap: 10%;
+}
+
+.change_profile_photo .profile_photo {
+  width: 30%;
+  height: auto;
+  border-radius: 10%;
+  box-shadow: -25px -49px 0px -7px rgba(200, 132, 28, 0.73);
+}
+
+.change_profile_photo .profile_photo_form {
+  flex-direction: column;
+  align-self: center;
+  line-height: 2em;
+}
+
+.change_profile_photo .profile_photo_form button {
+  text-align: center;
+  margin-left: 40%;
+  margin-top: 10%;
+  width: 20%;
+  height: 10%;
+  border-radius: 5%;
+}
+
+.login_form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: auto;
+  gap: 10%;
+}
+
+.login_form .block_inscription {
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.login_form .block_login {
+  width: 30%;
+  height: auto;
+  text-align: center;
+}
+
+.login_form .button_signup, .login_form .button_login {
+  text-decoration: none;
+  text-decoration: none;
+  padding: 10px;
+  border: black solid 2px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+}
+
+.login_form .button_signup:hover, .login_form .button_login:hover {
+  border: #d36e70 solid 2px;
+  color: white;
+  background-color: #d36e70;
+}
+
+.login_form .button_signup:active, .login_form .button_login:active {
+  color: white;
+  background-color: #d36e70;
+}
+
+input[type="password"], textarea {
+  padding: 8px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  border: black solid 2px;
+  width: 100%;
+  height: auto;
+}
+
+.signup_form {
+  text-decoration: none;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10%;
+  width: 40%;
+}
+
+.signup_form label {
+  color: black;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.signup_form button, .signup_form input[type="submit"] {
+  margin: auto;
+  width: 140px;
+  margin-top: 8%;
+  margin-left: 38%;
+}
+
+.signup_form input[type="password"],
+.signup_form input[type="email"],
+.signup_form textarea {
+  padding: 8px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  border: black solid 2px;
+  width: 100%;
+  height: auto;
+}
+
+.signup_form .sinon_login {
+  text-align: center;
+}
+
+.ticket-form, .critique_form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  /* Pour centrer le formulaire horizontalement */
+  /* Styles pour les labels */
+}
+
+.ticket-form label, .critique_form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ticket-form button, .critique_form button {
+  width: 20%;
+  height: 10%;
+  border-radius: 5%;
+  margin-top: auto;
+  align-self: flex-end;
+  margin-bottom: 25px;
+}
+
+.form_delete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: black solid 2px;
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.search-user {
+  align-self: center;
+  width: 40%;
+  height: auto;
+}
+
+.search-user .search_button {
+  margin-left: 42%;
+  color: black;
+  border: black solid 1px;
+  background-color: white;
+  padding: 2px 4px 2px 4px;
+}
+
+.search-user .search_button:hover {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 1px;
+}
+
+.search-user .search_results li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.search-user .search_results button[type='submit'] {
+  color: black;
+  border: black solid 1px;
+  background-color: white;
+  padding: 2px 4px 2px 4px;
+}
+
+.search-user .search_results button[type='submit']:hover {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 1px;
+}
+
+.follow_list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20%;
+  margin-top: 10%;
+}
+
+.follow_list h2 {
+  margin: 0;
+}
+
+.follow_list .user_followlist li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.follow_list .user_followlist li button[type='submit'] {
+  color: black;
+  background-color: white;
+  border: black solid 1px;
+  padding: 2px 4px 2px 4px;
+}
+
+.follow_list .user_followlist li button[type='submit']:hover {
+  color: white;
+  background-color: #d36e70;
+  border: #d36e70 solid 1px;
+}
+
+.follow_list .followed_list li {
+  list-style: none;
+  line-height: 220%;
+}
+
+/* Étoiles inactives */
+.star {
+  color: gray;
+  /* Couleur des étoiles inactives */
+  font-size: 30px;
+}
+
+/* Étoiles actives */
+.star.active {
+  color: gold;
+  /* Couleur des étoiles actives (pleines) */
+}
+
+/* CSS pour aligner les boutons de note horizontalement sur CritiqueForm */
+.note-buttons {
+  display: flex;
+  flex-direction: row;
+  /* Aligne les boutons horizontalement */
+  justify-content: space-around;
+}

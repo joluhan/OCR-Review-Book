@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load reviews_app_extras %}
+
+{% block content %}
+    <h3 class="my-3 text-center">Your posts</h3>
+
+    {% for instance in reviews_and_tickets %}
+    {% if instance|model_type == 'Ticket' %}
+        <div class="post_ticket">
+            <div class="head_box">
+                {% if instance.user == request.user %}
+                    <p>You requested a review</p>
+                {% else %}
+                    <p>{{ instance.user }} requested a review</p>
+                {% endif %}
+                <p>{{ instance.time_created }}</p>
+            </div>
+            <p>{{ instance.title }}</p>
+            <p>{{ instance.description }}</p>
+            {% if instance.image %}
+                <img src="{{ instance.image.url }}">
+            {% endif %}
+            <div class="button_post_action">
+                {% if instance.id not in tickets_with_review %}
+                  <div>
+                    <a href="{% url 'create_review_from_ticket' ticket_id=instance.id %}" class="btn btn-primary">Create a review</a>
+                  </div>
+                {% endif %}
+                <div class="d-flex, justify-content-between">
+                  <a href="{% url 'ticket_edit' ticket_id=instance.id %}" class="btn btn-warning">Edit</a>
+                  <a href="{% url 'ticket_delete' ticket_id=instance.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+           
+
+        </div>
+    {% endif %}
+
+    {% if instance|model_type == 'Review' %}
+        <div class="post_ticket">
+            <div class="head_box">
+                {% if instance.author == request.user %}
+                    <p>You published a review</p>
+                {% else %}
+                    <p>{{ instance.author }} published a review</p>
+                {% endif %}
+                <p>{{ instance.time_created }}</p>
+            </div>
+            <div class="review_comment">
+                <!-- Afficher les étoiles en fonction de la note -->
+                <div class="stars">
+                    {% for i in "12345" %}
+                        <span class="star{% if i|add:'0' <= instance.note %} active{% endif %}">★</span>
+                    {% endfor %}
+                </div>
+            </div>
+            <p>{{ instance.body }}</p>
+            <div class="post_ticket">
+                <p>Associated ticket : {{ instance.ticket.user }}</p>
+                <p>{{ instance.ticket.title }}</p>
+                <p>{{ instance.ticket.description }}</p>
+                    {% if instance.ticket.image %}
+                        <img src="{{ instance.ticket.image.url }}">
+                    {% endif %}
+                </p>
+            </div>
+            <div class="button_post_action">
+                <a href="{% url 'review_edit' review_id=instance.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'review_delete' review_id=instance.id %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        {% endif %} 
+{% endfor %}
+{% endblock content %}
