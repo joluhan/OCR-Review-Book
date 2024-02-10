@@ -12,8 +12,20 @@ LITRevu is a Django-based web application that allows users to publish and reque
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
 3. Set up a Python virtual environment and activate it.
+```
+python -m venv env
+source env/script/activate
+```
 4. Install the required dependencies using `pip`.
+```
+pip install -r requirements.txt
+```
 5. Apply migrations to set up the database schema.
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+
 
 ## Database Setup
 - Instructions on initializing the database with test data.
