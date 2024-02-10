@@ -44,8 +44,3 @@ python manage.py runserver
 ```
 - Access details for the web application (default is `http://127.0.0.1:8000/`).
 
-## Additional Configuration
-- Guide on setting up any additional services or environment variables.
-
-## Usage
-- Basic instructions on how to use the main features of the web application as outlined in the wireframes.
