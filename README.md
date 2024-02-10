@@ -31,8 +31,10 @@ python manage.py migrate
 
 
 ## Database Setup
-- Instructions on initializing the database with test data.
-- Steps for creating superuser account.
+- Run the createsuperuser command to create a superuser account, which allows access to the Django admin interface.
+```
+python manage.py createsuperuser
+```
 
 ## Running the Project
 - Command to start the Django development server.
