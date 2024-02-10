@@ -38,6 +38,10 @@ python manage.py createsuperuser
 
 ## Running the Project
 - Command to start the Django development server.
+```
+source env/script/activate
+python manage.py runserver
+```
 - Access details for the web application (default is `http://127.0.0.1:8000/`).
 
 ## Additional Configuration
