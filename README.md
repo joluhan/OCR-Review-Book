@@ -10,6 +10,9 @@ LITRevu is a Django-based web application that allows users to publish and reque
 
 ## Installation
 1. Clone the repository to your local machine.
+```
+https://github.com/joluhan/OCR-Review-Book.git
+```
 2. Navigate to the project directory.
 3. Set up a Python virtual environment and activate it.
 ```
