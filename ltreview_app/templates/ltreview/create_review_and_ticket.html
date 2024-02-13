@@ -1,16 +1,20 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h3 class="my-3 text-center"> Create a review </h3>
-    <form method="post" enctype="multipart/form-data" class="ticket-form">
+{% extends 'base.html' %}  <!-- Inherits from a base template to maintain consistent site layout and style -->
+
+{% block content %}  <!-- Defines content specific to this page, placed within a block named 'content' -->
+
+    <h3 class="my-3 text-center">Create a review</h3>  <!-- Page title -->
+
+    <form method="post" enctype="multipart/form-data" class="ticket-form">  <!-- Form for submitting the review and ticket information -->
       <div class="post_ticket">
-        <h4>Book/Article<h3>
-        {{ ticket_form.as_p }}
+        <h4>Book/Article</h4>  <!-- Section title for the book/article information -->
+        {{ ticket_form.as_p }}  <!-- Renders the ticket form fields as paragraph elements -->
       </div>
       <div class="post_ticket">
-        <h4>Review</h4>
-        {{ review_form.as_p }}
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Publish</button>
+        <h4>Review</h4>  <!-- Section title for the review -->
+        {{ review_form.as_p }}  <!-- Renders the review form fields as paragraph elements -->
+        {% csrf_token %}  <!-- Includes a CSRF token for security -->
+        <button type="submit" class="btn btn-primary">Publish</button>  <!-- Submit button for the form -->
       </div>
     </form>
-{% endblock content %}
+
+{% endblock content %}  <!-- End of the content block -->

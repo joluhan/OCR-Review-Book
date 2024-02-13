@@ -1,13 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}  <!-- Inherits from a base template to maintain consistent styling and layout across the application -->
 
-{% block content %}
-    <h2 class="my-3 text-center">Review delete confirmation</h2>
-    <div class="form_delete">
-        <p>Are you sure you want to delete this review?</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Delete</button>
+{% block content %}  <!-- Begins the content block for specific page content -->
+
+    <h2 class="my-3 text-center">Review delete confirmation</h2>  <!-- Page title with a margin and centered text -->
+
+    <div class="form_delete">  <!-- Container for the confirmation message and delete button -->
+        <p>Are you sure you want to delete this review?</p>  <!-- Confirmation message asking for user consent -->
+        
+        <form method="post">  <!-- Form for submitting the delete action -->
+            {% csrf_token %}  <!-- CSRF token for security -->
+            <button type="submit" class="btn btn-danger">Delete</button>  <!-- Button to confirm deletion, styled with a 'danger' class for emphasis -->
         </form>
     </div>
-    <a href="{% url 'user_posts' %}" class="btn btn-primary">Cancel</a>
-{% endblock %}
+
+    <a href="{% url 'user_posts' %}" class="btn btn-primary">Cancel</a>  <!-- Link to cancel the action and return to the user's posts, styled as a primary button -->
+
+{% endblock %}  <!-- Ends the content block -->

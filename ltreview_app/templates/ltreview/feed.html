@@ -1,77 +1,95 @@
-{% extends 'base.html' %}
-{% load reviews_app_extras %}
-{% block content %}
+{% extends 'base.html' %}  <!-- Inherits from a base template for consistent layout across the site -->
+
+{% load reviews_app_extras %}  <!-- Loads custom template tags/filters from 'reviews_app_extras' -->
+
+{% block content %}  <!-- Content block where the main page content will be placed -->
+  
+  <!-- Navigation buttons for creating tickets and reviews -->
   <div class="mx-auto mt-3 w-75 d-flex justify-content-around">
-    <a href="{% url 'ticket_create' %}" class="btn btn-info"> Request a review</a>
-    <a href="{% url 'review_and_ticket_create' %}" class="btn btn-primary"> Create a review</a>
+    <a href="{% url 'ticket_create' %}" class="btn btn-info">Request a review</a>  <!-- Link to request a new review -->
+    <a href="{% url 'review_and_ticket_create' %}" class="btn btn-primary">Create a review</a>  <!-- Link to create a new review -->
   </div>
   
+  <!-- Heading for the feed -->
   <h2 class="text-center">My feed</h2>
-    {% for instance in reviews_and_tickets %}
-      {% if instance|model_type == 'Ticket' %}
-        <div class="post_ticket">
-          <div class="head_box border-bottom mb-2">
-            {% if instance.user == request.user %}
-              <p>You requested a review</p>
-            {% else %}
-              <p>{{ instance.user }} requested a review</p>
-            {% endif %}
-            <p>{{ instance.time_created }}</p>
-          </div>
-          <p>{{ instance.title }}</p>
-          <p>{{ instance.description }}</p>
-          {% if instance.image %}
-            <img src="{{ instance.image.url }}">
+
+  <!-- Loop through each instance in the provided list of reviews and tickets -->
+  {% for instance in reviews_and_tickets %}
+    <!-- Check if the current instance is a Ticket using a custom template filter -->
+    {% if instance|model_type == 'Ticket' %}
+      <!-- Ticket display structure -->
+      <div class="post_ticket">
+        <div class="head_box border-bottom mb-2">
+          <!-- Display who requested the review, differentiating if it was the current user -->
+          {% if instance.user == request.user %}
+            <p>You requested a review</p>
+          {% else %}
+            <p>{{ instance.user }} requested a review</p>
           {% endif %}
-          <div class="button_post_action">
-            {% if instance.id in user_has_created_review or instance.user == request.user %}
-              <!-- Ne rien afficher ici car l'utilisateur a déjà créé une review -->
-            {% else %}
-              <a href="{% url 'create_review_from_ticket' ticket_id=instance.id %}" class="btn btn-primary">Create a review</a>
-            {% endif %}
+          <p>{{ instance.time_created }}</p>  <!-- Display when the ticket was created -->
         </div>
+        <p>{{ instance.title }}</p>  <!-- Display the ticket title -->
+        <p>{{ instance.description }}</p>  <!-- Display the ticket description -->
+        <!-- If the ticket has an associated image, display it -->
+        {% if instance.image %}
+          <img src="{{ instance.image.url }}">
+        {% endif %}
+        <!-- Display a button to create a review for the ticket, unless the user has already done so -->
+        <div class="button_post_action">
+          {% if instance.id in user_has_created_review or instance.user == request.user %}
+            <!-- Do not display any action if the user has already created a review or if the ticket is theirs -->
+          {% else %}
+            <a href="{% url 'create_review_from_ticket' ticket_id=instance.id %}" class="btn btn-primary">Create a review</a>
+          {% endif %}
         </div>
-      {% endif %}
+      </div>
+    {% endif %}
 
-      {% if instance|model_type == 'Review' %}
+    <!-- Check if the current instance is a Review -->
+    {% if instance|model_type == 'Review' %}
+      <!-- Review display structure -->
+      <div class="post_ticket">
+        <div class="head_box border-bottom mb-2">
+          <!-- Display who posted the review, differentiating if it was the current user -->
+          {% if instance.author == request.user %}
+            <p class="small">You posted a review</p>
+          {% else %}
+            <p class="small">{{ instance.author }} posted a review</p>
+          {% endif %}
+          <p class="small">{{ instance.time_created }}</p>  <!-- Display when the review was created -->
+        </div>
+
+        <div class="review_comment">
+          <p>{{ instance.headline }} -</p>
+          <!-- Display rating stars based on the review rating -->
+          <div class="stars">
+            {% for i in "12345" %}
+              <!-- Active stars represent the rating; inactive for the rest -->
+              <span class="star{% if i|add:'0' <= instance.rating %} active{% endif %}">★</span>
+            {% endfor %}
+          </div>
+        </div>
+        <p>{{ instance.body }}</p>  <!-- Display the review body -->
+        <!-- Display information about the associated ticket -->
         <div class="post_ticket">
-          <div class="head_box border-bottom mb-2">
-            {% if instance.author == request.user %}
-              <p class="small">You posted a review</p>
+          <p>Associated ticket : {{ instance.ticket.user }}</p>
+          <p>{{ instance.ticket.title }}</p>
+          <p>{{ instance.ticket.description }}</p>
+          <!-- If the associated ticket has an image, display it -->
+          {% if instance.ticket.image %}
+            <img src="{{ instance.ticket.image.url }}">
+          {% endif %}
+          <!-- Display a button to create a review for the ticket, unless the user has already done so -->
+          <div class="button_post_action">
+            {% if instance.ticket.id in user_has_created_review or instance.ticket.user == request.user %}
+              <!-- Do not display any action if the user has already created a review or if the ticket is theirs -->
             {% else %}
-              <p class="small">{{ instance.author }} posted a review</p>
+              <a href="{% url 'create_review_from_ticket' ticket_id=instance.ticket.id %}" class="btn btn-primary">Create a review</a>
             {% endif %}
-            <p class="small">{{ instance.time_created }}</p>
-          </div>
-
-          <div class="review_comment">
-            <p>{{ instance.headline }} -</p>
-
-            <!-- Afficher les étoiles en fonction de la note -->
-            <div class="stars">
-              {% for i in "12345" %}
-                <span class="star{% if i|add:'0' <= instance.rating %} active{% endif %}">★</span>
-              {% endfor %}
-            </div>
-          </div>
-          <p>{{ instance.body }}</p>
-          <div class="post_ticket">
-            <p>Associated ticket : {{ instance.ticket.user }}</p>
-            <p>{{ instance.ticket.title }}</p>
-            <p>{{ instance.ticket.description }}</p>
-              {% if instance.ticket.image %}
-                <img src="{{ instance.ticket.image.url }}">
-              {% endif %}
-              <div class="button_post_action">
-                {% if instance.ticket.id in user_has_created_review or instance.ticket.user == request.user %}
-                  <!-- Ne rien afficher ici car l'utilisateur a déjà créé une review -->
-                {% else %}
-                  <a href="{% url 'create_review_from_ticket' ticket_id=instance.ticket.id %}" class="btn btn-primary">Create a review</a>
-                {% endif %}
-              </div>
           </div>
         </div>
-      {% endif %} 
-    {% endfor %}
+      </div>
+    {% endif %} 
+  {% endfor %}
 
 {% endblock content %}

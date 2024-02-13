@@ -1,25 +1,29 @@
-{% extends 'base.html' %}
-{% block content %}
-  <h3 class="my-3 text-center">Create a review</h3>
+{% extends 'base.html' %}  <!-- Inherits from a base template, ensuring consistency across the site -->
+
+{% block content %}  <!-- Begins the content block where page-specific content will be placed -->
+
+  <h3 class="my-3 text-center">Create a review</h3>  <!-- Page title -->
 
   <div class='post_ticket'>
-    <p>You are posting in response to:</p>
+    <p>You are posting in response to:</p>  <!-- Introductory text -->
 
     <div class="head_box">
-            <p>{{ ticket.user }} asked for a review</p>
-            <p>{{ ticket.time_created }}</p>
+            <p>{{ ticket.user }} asked for a review</p>  <!-- Displays the username of the person who posted the ticket -->
+            <p>{{ ticket.time_created }}</p>  <!-- Shows when the ticket was created -->
         </div>
-            <p>{{ ticket.title }}</p>
-            <p>{{ ticket.description}}</p>
-            <p>{% if ticket.image %}
-                <img src="{{ ticket.image.url }}">
-                {% endif %}
+            <p>{{ ticket.title }}</p>  <!-- The title of the ticket -->
+            <p>{{ ticket.description}}</p>  <!-- The description of the ticket -->
+            <p>
+              {% if ticket.image %}  <!-- Checks if there is an image associated with the ticket -->
+                <img src="{{ ticket.image.url }}">  <!-- Displays the image if it exists -->
+              {% endif %}
             </p>
-    </div>
-    <form method="post" class="post_ticket">
-        {% csrf_token %}
-        {{ review_form.as_p }}
-        <button type="submit" class="btn btn-primary">Create the review</button>
-    </form>
   </div>
-{% endblock content %}
+
+  <form method="post" class="post_ticket">  <!-- The form for submitting the review -->
+        {% csrf_token %}  <!-- Includes a CSRF token for security -->
+        {{ review_form.as_p }}  <!-- Renders the review form fields as paragraph elements -->
+        <button type="submit" class="btn btn-primary">Create the review</button>  <!-- Submit button for the form -->
+  </form>
+
+{% endblock content %}  <!-- Ends the content block -->

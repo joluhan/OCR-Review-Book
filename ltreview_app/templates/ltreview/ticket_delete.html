@@ -1,13 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}  <!-- Inherits from a base template to maintain a consistent layout and styling across the site -->
 
-{% block content %}
-    <h2>Ticket deletion confirmation</h2>
-    <div class="form_delete">
-        <p>Are you sure you want to delete this ticket?</p>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger">Confirm</button>
+{% block content %}  <!-- Starts the content block where the deletion confirmation message and buttons will be placed -->
+
+    <h2>Ticket deletion confirmation</h2>  <!-- Displays a heading for the confirmation page -->
+
+    <div class="form_delete">  <!-- A container div for styling and grouping the confirmation message and button -->
+        <p>Are you sure you want to delete this ticket?</p>  <!-- A message asking the user to confirm the deletion -->
+
+        <form method="post">  <!-- A form for submitting the deletion confirmation -->
+            {% csrf_token %}  <!-- A CSRF token for protecting against cross-site request forgery attacks -->
+            <button type="submit" class="btn btn-danger">Confirm</button>  <!-- A button to submit the form, styled with 'btn-danger' for emphasis -->
         </form>
     </div>
-    <a href="{% url 'user_posts' %}" class="btn btn-primary">Cancel</a>
-{% endblock %}
+
+    <a href="{% url 'user_posts' %}" class="btn btn-primary">Cancel</a>  <!-- A link to cancel the deletion and return to the user's posts, styled with 'btn-primary' -->
+
+{% endblock %}  <!-- Ends the content block -->

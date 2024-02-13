@@ -1,10 +1,15 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h2 class="my-3 text-center">Edit ticket</h2>
-    <form method="post" enctype="multipart/form-data" class="post_ticket">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Save</button>
+{% extends 'base.html' %}  <!-- Inherits from a base template file to maintain consistent layout and styling -->
+
+{% block content %}  <!-- Defines the main content area where the edit ticket form will be displayed -->
+
+    <h2 class="my-3 text-center">Edit ticket</h2>  <!-- The page title with top margin and centered text -->
+
+    <form method="post" enctype="multipart/form-data" class="post_ticket">  <!-- The form for editing a ticket, supporting file uploads -->
+        {% csrf_token %}  <!-- A CSRF token to prevent cross-site request forgery attacks -->
+        {{ form.as_p }}  <!-- Renders the form fields, each wrapped in a paragraph (<p>) tag for spacing -->
+        <button type="submit" class="btn btn-primary">Save</button>  <!-- A button to submit the form, styled as a primary button -->
     </form>
-    <a href="{% url 'user_posts' %}" class="btn btn-warning mb-4">Back to your posts</a>
-{% endblock %}
+
+    <a href="{% url 'user_posts' %}" class="btn btn-warning mb-4">Back to your posts</a>  <!-- A link to navigate back to the user's posts, styled as a warning button with bottom margin -->
+
+{% endblock %}  <!-- Ends the content block where the form is defined -->

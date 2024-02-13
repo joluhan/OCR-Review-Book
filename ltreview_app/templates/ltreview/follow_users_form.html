@@ -1,57 +1,66 @@
-{% extends 'base.html' %}
-{% block content %}
-  <!-- Vue pour rechercher des utilisateurs afin de s'y abonner -->
+{% extends 'base.html' %}  <!-- Inherits from the base layout to maintain consistent design -->
+
+{% block content %}  <!-- Content specific to this page is enclosed within this block -->
+
+  <!-- Title for the page -->
   <h3 class="my-3 text-center">Follow other users</h3>
+  
+  <!-- Search form to find users to follow -->
   <div class="search-user">
     <form method="post">
-      {% csrf_token %}
+      {% csrf_token %}  <!-- CSRF token for form security -->
       <label for="search_user">Search for a user :</label>
-      <input type="text" name="search_user" id="search-user">
-      <button type="submit" class="search_button">Search</button>
+      <input type="text" name="search_user" id="search-user">  <!-- Input field for the search query -->
+      <button type="submit" class="search_button">Search</button>  <!-- Button to submit the search -->
     </form>
 
+    <!-- Conditionally display search results if any -->
     {% if search_results %}
       <h3 class="my-3 text-center">Search results :</h3>
       <div class="search_results">
-      <ul>
-        {% for user in search_results %}
-          <li>
-            {{ user.username }}
-            <form method="post" action="{% url 'follow_users' %}">
-              {% csrf_token %}
-              <input type="hidden" name="user_id" value="{{ user.id }}">
-              <button type="submit" class="btn btn-primary">Follow</button>
-            </form>
-          </li>
-        {% endfor %}
-      </ul>
-      </div>
-    {% endif %}
-
-    <div class="follow_list">
-      <div class="user_followlist">
-        <h4>Subscriptions</h4>
         <ul>
-          {% for user in request.user.follows.all %}
+          {% for user in search_results %}  <!-- Iterate over each user found in the search results -->
             <li>
-              {{ user.username }}
-              <form method="post" action="{% url 'unfollow_user' user.pk %}">
+              {{ user.username }}  <!-- Display the username of the found user -->
+              <form method="post" action="{% url 'follow_users' %}">  <!-- Form to follow a user -->
                 {% csrf_token %}
-                <button type="submit" class="btn btn-warning">Unfollow</button>
+                <input type="hidden" name="user_id" value="{{ user.id }}">  <!-- Hidden field to pass the user ID -->
+                <button type="submit" class="btn btn-primary">Follow</button>  <!-- Button to follow the user -->
               </form>
             </li>
           {% endfor %}
         </ul>
       </div>
-      <div class="followed_list">
-        <!-- Vue pour les utilisateurs qui nous suivent -->
-        <h4>Subscribers</h4>
-        <ul>
-        {% for user in request.user.followed_by.all %}
-          <li>{{ user.username }}</li>
+    {% endif %}
+  </div>
+
+  <!-- Lists of users the current user is following and users following the current user -->
+  <div class="follow_list">
+    <!-- Subscriptions list -->
+    <div class="user_followlist">
+      <h4>Subscriptions</h4>
+      <ul>
+        {% for user in request.user.follows.all %}  <!-- Iterate over users the current user is following -->
+          <li>
+            {{ user.username }}  <!-- Display the username -->
+            <form method="post" action="{% url 'unfollow_user' user.pk %}">  <!-- Form to unfollow a user -->
+              {% csrf_token %}
+              <button type="submit" class="btn btn-warning">Unfollow</button>  <!-- Button to unfollow the user -->
+            </form>
+          </li>
         {% endfor %}
-        </ul>
-      </div>
+      </ul>
+    </div>
+
+    <!-- Subscribers list -->
+    <div class="followed_list">
+      <h4>Subscribers</h4>
+      <ul>
+        {% for user in request.user.followed_by.all %}  <!-- Iterate over users who are following the current user -->
+          <li>{{ user.username }}</li>  <!-- Display the username of the follower -->
+        {% endfor %}
+      </ul>
     </div>
   </div>
+
 {% endblock content %}

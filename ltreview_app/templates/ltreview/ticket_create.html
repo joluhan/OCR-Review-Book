@@ -1,9 +1,14 @@
-{% extends "base.html" %}
-{% block content %}
-  <h1 class="my-3 text-center">Add a Ticket</h1>
+{% extends "base.html" %}  <!-- Inherits the structure and styles from a base template file -->
+
+{% block content %}  <!-- Starts the 'content' block where page-specific content will be inserted -->
+
+  <h1 class="my-3 text-center">Add a Ticket</h1>  <!-- Page title with Bootstrap margin and text-center classes for styling -->
+
+  <!-- The form for adding a new ticket -->
   <form method="post" enctype="multipart/form-data" class="post_ticket">
-      {% csrf_token %}
-      {{ ticket_form.as_p }}
-      <button type="submit" class="btn btn-primary">Publish</button>
+      {% csrf_token %}  <!-- Includes a CSRF token for security to protect against CSRF attacks -->
+      {{ ticket_form.as_p }}  <!-- Renders the fields of the ticket_form as paragraph elements for simplicity -->
+      <button type="submit" class="btn btn-primary">Publish</button>  <!-- Submit button with Bootstrap primary button styling -->
   </form>
-{% endblock content %}
+
+{% endblock content %}  <!-- Ends the 'content' block -->

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Review</title>
+    <title>Review</title>  <!-- The title of the HTML document -->
 </head>
 <body>
-    <h1>{{ review.headline }}</h1>
-    <p>{{ review.body }}</p>
-    <p>Note: {{ review.rating }}/5</p>
-    <p>Créé par: {{ review.user.username }}</p>
-    <p>Date de création: {{ review.time_created }}</p>
+    <h1>{{ review.headline }}</h1>  <!-- Display the headline of the review -->
+    <p>{{ review.body }}</p>  <!-- Display the body text of the review -->
+    <p>Note: {{ review.rating }}/5</p>  <!-- Display the rating of the review out of 5 -->
+    <p>Créé par: {{ review.user.username }}</p>  <!-- Display the username of the review's author -->
+    <p>Date de création: {{ review.time_created }}</p>  <!-- Display the creation date of the review -->
+    <!-- Link to the associated ticket's page using its ID in the URL path -->
     <p>Ticket associé: <a href="/ticket/{{ review.ticket.id }}">{{ review.ticket.title }}</a></p>
 </body>
 </html>

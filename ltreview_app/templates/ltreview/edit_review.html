@@ -1,10 +1,15 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h3 class="my-3 text center">Edit review</h3>
-    <form method="post" class="post_ticket">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Save</button>
+{% extends 'base.html' %}  <!-- Inherits the structure and styles from a base template -->
+
+{% block content %}  <!-- Content block where the specific page content will be injected -->
+
+    <h3 class="my-3 text center">Edit review</h3>  <!-- Page heading indicating the action (editing a review) -->
+
+    <form method="post" class="post_ticket">  <!-- Form for submitting the edited review -->
+        {% csrf_token %}  <!-- CSRF token for form submission security -->
+        {{ form.as_p }}  <!-- Renders the form fields, each wrapped in a <p> tag -->
+        <button type="submit" class="btn btn-primary">Save</button>  <!-- Button to save the edited review -->
     </form>
-    <a href="{% url 'user_posts' %}" class="btn btn-warning mb-4">Back to your posts</a>
-{% endblock %}
+
+    <a href="{% url 'user_posts' %}" class="btn btn-warning mb-4">Back to your posts</a>  <!-- Link to navigate back to the user's posts -->
+
+{% endblock %}  <!-- Ends the content block -->
